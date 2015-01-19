@@ -1,7 +1,6 @@
 var app,
     changed     = require('gulp-changed'),
     database    = require('./src/db/database.json'),
-    del         = require('del'),
     embedlr     = require('gulp-embedlr'),
     ecsport     = 8888,
     ecstatic    = require('ecstatic')({root: './dist', cache: 'no-cache', showDir: true}), port = ecsport,
@@ -17,7 +16,8 @@ var app,
     purge       = false,
     sass        = require('gulp-sass'),
     uglify      = require('gulp-uglify'),
-    url         = require('url');
+    url         = require('url'),
+    clear       = require('gulp-clean');
 
 
 
@@ -31,19 +31,12 @@ process.argv.forEach(function (val) {
     }
 });
 
-
-
-// purge dist
-gulp.task('purge', function (cb) {
-    del(['./dist'], cb);
+// clear dist
+gulp.task('clean', function () {
+    return gulp.src('./dist/*.*', { read: false })
+        .pipe(clear({force:true}));
 });
 
-
-
-// clean dist
-gulp.task('clean', function (cb) {
-    del(['./dist/**/*.*'], cb);
-});
 
 
 
