@@ -1,31 +1,13 @@
-/*jslint browser:true */
-/*global $, jQuery*/
-(function ($) {
-    "use strict";
+"use strict";
 
-    var target;
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-    $(function () {
-        $('a[href*=#]:not([href=#])').click(function () {
-            if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-                target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1500);
-                    return false;
-                }
-            }
-        });
-    });
+var a = 1;
 
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 200) {
-            $('.goTop').fadeIn(200);
-        } else {
-            $('.goTop').fadeOut(200);
-        }
-    });
+var Person = function Person() {
+  _classCallCheck(this, Person);
+};
 
-}(jQuery));
+var sumar = function (a, b) {
+  return a + b;
+};

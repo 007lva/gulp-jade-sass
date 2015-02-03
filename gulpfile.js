@@ -18,7 +18,8 @@ var app,
     uglify      = require('gulp-uglify'),
     url         = require('url'),
     del         = require('del'),
-    vinylPaths  = require('vinyl-paths');
+    vinylPaths  = require('vinyl-paths'),
+    sixToFive   = require('gulp-6to5');
 
 
 
@@ -38,8 +39,12 @@ gulp.task('clean', function () {
         .pipe(vinylPaths(del));
 });
 
-
-
+//convert ES6 to ES5
+gulp.task('6to5', function () {
+    return gulp.src('./src/es6/*.js')
+        .pipe(sixToFive())
+        .pipe(gulp.dest('./src/js'));
+});
 
 // compile scss as compressed css
 gulp.task('sass', function () {
@@ -48,8 +53,6 @@ gulp.task('sass', function () {
         .pipe(sass({'outputStyle': 'compressed'}))
         .pipe(gulp.dest('./dist/css'));
 });
-
-
 
 // jade to html
 gulp.task('jade', function () {
@@ -62,8 +65,6 @@ gulp.task('jade', function () {
         .pipe(gulp.dest('./dist'));
 });
 
-
-
 // move static assets
 gulp.task('assets', function () {
     gulp.src('./src/bower_components/**')
@@ -71,8 +72,6 @@ gulp.task('assets', function () {
     gulp.src('./src/img/**')
         .pipe(gulp.dest('./dist/img'));
 });
-
-
 
 // compress javascript
 gulp.task('uglify', function () {
@@ -86,7 +85,7 @@ gulp.task('uglify', function () {
 
 
 // all build tasks
-gulp.task('build', ['clean', 'sass', 'jade', 'assets', 'uglify']);
+gulp.task('build', ['clean', '6to5', 'sass', 'jade', 'assets', 'uglify']);
 
 
 
@@ -106,6 +105,7 @@ gulp.task('static', ['build'], function (next) {
 
 // start livereload server, listening on port 'lrport'
 gulp.task('watch', ['static'], function () {
+    gulp.watch('./src/es6/*.js', ['6to5']);
     gulp.watch('./src/scss/*.scss', ['sass']);
     gulp.watch('./src/jade/**/*.jade', ['jade']);
     gulp.watch('./src/js/*.js', ['uglify']);
