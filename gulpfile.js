@@ -17,7 +17,8 @@ var app,
     sass        = require('gulp-sass'),
     uglify      = require('gulp-uglify'),
     url         = require('url'),
-    clear       = require('gulp-clean');
+    del         = require('del'),
+    vinylPaths  = require('vinyl-paths');
 
 
 
@@ -34,7 +35,7 @@ process.argv.forEach(function (val) {
 // clear dist
 gulp.task('clean', function () {
     return gulp.src('./dist/*.*', { read: false })
-        .pipe(clear({force:true}));
+        .pipe(vinylPaths(del));
 });
 
 
@@ -98,7 +99,7 @@ gulp.task('static', ['build'], function (next) {
         .listen(port, function () {
             gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + ecsport + '/') + ' Excelsior! :)');
             next();
-        }); 
+        });
 });
 
 
