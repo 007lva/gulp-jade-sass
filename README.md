@@ -1,5 +1,5 @@
 #GulpJadeSassES6
-GulpJadeSass6to5 is an automated build environment well suited for HTML, CSS and JavaScript prototyping. It runs on the (streaming) build system gulp.js. GJS uses the Jade template language to modularize html into templates, allowing developers to take a DRY approach to front-end development. Also included is the Sass CSS extension language.
+GulpJadeSassES6 is an automated build environment well suited for HTML, CSS and JavaScript prototyping. It runs on the (streaming) build system gulp.js. GJS uses the Jade template language to modularize html into templates, allowing developers to take a DRY approach to front-end development. Also included is the Sass CSS extension language.
 
 ##Overview
 GJS watches for changes to .jade, .scss and .js files. Editing and saving those files will cause GJS to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
